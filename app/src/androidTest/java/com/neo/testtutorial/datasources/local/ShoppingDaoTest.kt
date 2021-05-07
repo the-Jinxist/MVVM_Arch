@@ -16,23 +16,27 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * JUnit is basically used to test Java/Kotlin code and we need that functionality
+ * @RunWith(AndroidJUnit4::class) is basically used to test Java/Kotlin code and we need that functionality
  * when executing our test code on the Android framework
  */
 
 /**
- * Small Test is used to specify that we're writing unit tests
+ * @SmallTest is used to specify that we're writing unit tests
  * Integrated tests should be annotated with Medium Tests and
  * UI Tests should be annotated with Large Tests
  */
 
+/**
+ * @ExperimentalCoroutinesApi removes the warning on out test-optimized bad boy
+ * ..@runBlockingTest
+ */
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class ShoppingDaoTest {
 
     /**
-     * This rule makes sure everything runs on the main thread
+     * @instantTaskExecutor This rule makes sure everything runs on the main thread
      * ..so we can properly get the value of our LiveData-s
      */
     @get:Rule
@@ -43,7 +47,11 @@ class ShoppingDaoTest {
 
     /**
      * A new database is setup before each and every test case
-     * ..providing eery test case with a brand new database
+     * ..providing eery test case with a brand new database.
+     *
+     * Room.inMemoryDatabaseBuilder is used so that the database is
+     * built on the RAM not on the persistence storage of the
+     * Android device
      */
 
     @Before
@@ -63,7 +71,7 @@ class ShoppingDaoTest {
     }
 
     /**
-     * {runBlockingTest} has been optimized for testing, baby!
+     * {@runBlockingTest} has been optimized for testing, baby!
      */
 
     @Test
@@ -80,7 +88,7 @@ class ShoppingDaoTest {
         /**
          * Live Data runs asynchronously which can cause race condition, I think.
          * So we need to wait and get the data to make sure we are aware of the
-         * current state of the data. {LiveData.getOrAwaitValue} is the answer, it waits
+         * current state of the data. {LiveData.@getOrAwaitValue} is the answer, it waits
          * for the data to be updated from the data-source then sets the value
          */
         val allShoppingItem = dao.observeAllShoppingItems().getOrAwaitValue()
@@ -123,14 +131,14 @@ class ShoppingDaoTest {
             5.5f,
             4,
             "url",
-            id = 1
+            id = 2
         )
         val shoppingItem3 = ShoppingItem(
             "name",
             100f,
             0,
             "url",
-            id = 1
+            id = 3
         )
 
         dao.insertShoppingItem(shoppingItem1)
