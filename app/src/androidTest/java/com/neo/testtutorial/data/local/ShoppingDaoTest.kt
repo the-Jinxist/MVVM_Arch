@@ -1,4 +1,4 @@
-package com.neo.testtutorial.datasources.local
+package com.neo.testtutorial.data.local
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import com.neo.testtutorial.domain.local.ShoppingItem
 import com.neo.testtutorial.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -47,7 +48,7 @@ class ShoppingDaoTest {
 
     /**
      * A new database is setup before each and every test case
-     * ..providing eery test case with a brand new database.
+     * ..providing every test case with a brand new database.
      *
      * Room.inMemoryDatabaseBuilder is used so that the database is
      * built on the RAM not on the persistence storage of the

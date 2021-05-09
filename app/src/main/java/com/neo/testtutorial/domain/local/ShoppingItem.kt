@@ -1,4 +1,4 @@
-package com.neo.testtutorial.datasources.local
+package com.neo.testtutorial.domain.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

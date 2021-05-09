@@ -1,7 +1,8 @@
-package com.neo.testtutorial.datasources.local
+package com.neo.testtutorial.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.neo.testtutorial.domain.local.ShoppingItem
 
 @Dao
 interface ShoppingDao {
