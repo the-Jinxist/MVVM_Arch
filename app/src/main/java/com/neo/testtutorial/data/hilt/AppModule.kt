@@ -2,8 +2,10 @@ package com.neo.testtutorial.data.hilt
 
 import android.content.Context
 import androidx.room.Room
+import com.neo.testtutorial.data.local.ShoppingDao
 import com.neo.testtutorial.data.local.ShoppingItemDatabase
 import com.neo.testtutorial.data.network.PixabayAPI
+import com.neo.testtutorial.repositories.DefaultShoppingRepository
 import com.neo.testtutorial.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -29,6 +31,13 @@ object AppModule {
     fun providesShoppingItemDao(
         database: ShoppingItemDatabase
     ) = database.shoppingDao()
+
+    @Singleton
+    @Provides
+    fun providesDefaultShoppingRepository(
+        dao: ShoppingDao,
+        api: PixabayAPI
+    ) = DefaultShoppingRepository(dao, api)
 
     @Provides
     @Singleton
