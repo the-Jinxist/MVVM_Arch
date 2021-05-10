@@ -6,8 +6,6 @@ import com.neo.testtutorial.data.network.PixabayAPI
 import com.neo.testtutorial.data.network.Resource
 import com.neo.testtutorial.domain.local.ShoppingItem
 import com.neo.testtutorial.domain.network.ImageResponse
-import retrofit2.Response
-import java.lang.Exception
 import javax.inject.Inject
 
 class DefaultShoppingRepository @Inject constructor(

@@ -1,7 +1,8 @@
-package com.neo.testtutorial
+package com.neo.testtutorial.presentation.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.neo.testtutorial.R
 
 class MainActivity : AppCompatActivity() {
 
