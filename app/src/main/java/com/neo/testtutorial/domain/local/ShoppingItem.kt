@@ -11,6 +11,6 @@ data class ShoppingItem(
     var imageUrl: String,
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int?
+    var id: Int? = null
 
 )

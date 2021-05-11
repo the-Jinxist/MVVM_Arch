@@ -1,15 +1,33 @@
 package com.neo.testtutorial.presentation.viewmodels
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
+import com.neo.testtutorial.MainCoroutineRule
 import com.neo.testtutorial.data.network.Status
 import com.neo.testtutorial.getOrAwaitValueTest
 import com.neo.testtutorial.repositories.FakeShoppingRepository
 import com.neo.testtutorial.utils.Constants
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 
 class ShoppingViewModelTest {
+
+    /**
+     * Used to make sure each test waits for the live data to produce the data
+     * ..that it is observing
+     */
+    @get:Rule
+    var instantTaskExecutor =  InstantTaskExecutorRule()
+
+    /**
+     * Applies the rule to all coroutines running in the test
+     */
+    @ExperimentalCoroutinesApi
+    @get: Rule
+    var mainCoroutineRule = MainCoroutineRule()
 
     private lateinit var viewModel: ShoppingViewModel
 
