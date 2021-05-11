@@ -6,6 +6,7 @@ import com.neo.testtutorial.data.local.ShoppingDao
 import com.neo.testtutorial.data.local.ShoppingItemDatabase
 import com.neo.testtutorial.data.network.PixabayAPI
 import com.neo.testtutorial.repositories.DefaultShoppingRepository
+import com.neo.testtutorial.repositories.ShoppingRepository
 import com.neo.testtutorial.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -20,24 +21,30 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object AppModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideShoppingItemDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(context, ShoppingItemDatabase::class.java, Constants.DATABASE_NAME)
+    ): ShoppingItemDatabase{
+        return Room.databaseBuilder(context, ShoppingItemDatabase::class.java, Constants.DATABASE_NAME).build()
+    }
 
-    @Provides
     @Singleton
+    @Provides
     fun providesShoppingItemDao(
         database: ShoppingItemDatabase
-    ) = database.shoppingDao()
+    ): ShoppingDao{
+        return database.shoppingDao()
+    }
 
     @Singleton
     @Provides
     fun providesDefaultShoppingRepository(
         dao: ShoppingDao,
         api: PixabayAPI
-    ) = DefaultShoppingRepository(dao, api)
+    ): ShoppingRepository{
+        return DefaultShoppingRepository(dao, api)
+    }
 
     @Provides
     @Singleton
