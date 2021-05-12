@@ -8,6 +8,8 @@ import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.neo.testtutorial.domain.local.ShoppingItem
 import com.neo.testtutorial.getOrAwaitValue
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -15,10 +17,14 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * @RunWith(AndroidJUnit4::class) is basically used to test Java/Kotlin code and we need that functionality
  * when executing our test code on the Android framework
+ *
+ * ..We removed this later because we specified our own hilt test runner
  */
 
 /**
@@ -31,9 +37,15 @@ import org.junit.runner.RunWith
  * @ExperimentalCoroutinesApi removes the warning on out test-optimized bad boy
  * ..@runBlockingTest
  */
+
+/**
+ * @HiltAndroidTest is used to indicate that we will do data injection in
+ * ..this test class
+ */
+
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 @SmallTest
+@HiltAndroidTest
 class ShoppingDaoTest {
 
     /**
@@ -43,8 +55,13 @@ class ShoppingDaoTest {
     @get:Rule
     var instantTaskExecutor =  InstantTaskExecutorRule()
 
-    private lateinit var database: ShoppingItemDatabase
-    private lateinit var dao: ShoppingDao
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
+    @Inject
+    @Named("test_db")
+    lateinit var database: ShoppingItemDatabase
+    lateinit var dao: ShoppingDao
 
     /**
      * A new database is setup before each and every test case
@@ -57,12 +74,7 @@ class ShoppingDaoTest {
 
     @Before
     fun setup(){
-        database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            ShoppingItemDatabase::class.java
-        ).allowMainThreadQueries()
-        .build()
-
+        hiltRule.inject()
         dao = database.shoppingDao()
     }
 
