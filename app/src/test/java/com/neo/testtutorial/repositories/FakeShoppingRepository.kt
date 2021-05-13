@@ -21,7 +21,7 @@ class FakeShoppingRepository : ShoppingRepository{
     /**
      * Should force the network error for the resource
      */
-    private fun setShouldReturnNetworError(value: Boolean){
+    private fun setShouldReturnNetworkError(value: Boolean){
         shouldReturnNetworkError = value
     }
 
