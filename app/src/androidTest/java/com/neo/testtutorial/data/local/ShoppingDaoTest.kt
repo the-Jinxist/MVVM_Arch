@@ -63,15 +63,6 @@ class ShoppingDaoTest {
     lateinit var database: ShoppingItemDatabase
     lateinit var dao: ShoppingDao
 
-    /**
-     * A new database is setup before each and every test case
-     * ..providing every test case with a brand new database.
-     *
-     * Room.inMemoryDatabaseBuilder is used so that the database is
-     * built on the RAM not on the persistence storage of the
-     * Android device
-     */
-
     @Before
     fun setup(){
         hiltRule.inject()

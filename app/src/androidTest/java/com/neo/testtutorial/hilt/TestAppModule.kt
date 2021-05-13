@@ -14,6 +14,12 @@ import javax.inject.Named
 @InstallIn(ApplicationComponent::class)
 object TestAppModule {
 
+    /**
+     * Room.inMemoryDatabaseBuilder is used so that the database is
+     * built on the RAM not on the persistence storage of the
+     * Android device
+     */
+
     @Provides
     @Named("test_db")
     fun providesInMemoryDb(
