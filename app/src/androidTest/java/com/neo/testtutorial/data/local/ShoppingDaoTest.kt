@@ -8,6 +8,8 @@ import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.neo.testtutorial.domain.local.ShoppingItem
 import com.neo.testtutorial.getOrAwaitValue
+import com.neo.testtutorial.launchFragmentInHiltContainer
+import com.neo.testtutorial.presentation.fragments.ShoppingFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -153,6 +155,16 @@ class ShoppingDaoTest {
 
         assertThat(totalPriceSum).isEqualTo((2 * 10f) + (4 * 5.5f))
 
+    }
+
+    /**
+     * The use of the fancy method in HiltExtension.kt
+     */
+    @Test
+    fun testLaunchFragmentInHiltContainer(){
+        launchFragmentInHiltContainer<ShoppingFragment>() {
+
+        }
     }
 
 }
