@@ -1,4 +1,4 @@
-package com.neo.testtutorial.presentation.utils
+package com.neo.testtutorial.presentation
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
@@ -9,9 +9,10 @@ import com.neo.testtutorial.presentation.fragments.AddShoppingItemFragment
 import com.neo.testtutorial.presentation.fragments.ImagePickFragment
 import com.neo.testtutorial.presentation.fragments.ShoppingFragment
 import com.neo.testtutorial.presentation.viewmodels.ShoppingViewModel
+import com.neo.testtutorial.repositories.FakeShoppingRepositoryAndroidTest
 import javax.inject.Inject
 
-class ShoppingFragmentFactory @Inject constructor(
+class TestShoppingFragmentFactory @Inject constructor(
     private val imageAdapter: ImageAdapter,
     private val glide: RequestManager,
     private val shoppingItemAdapter: ShoppingItemAdapter
@@ -22,7 +23,8 @@ class ShoppingFragmentFactory @Inject constructor(
             ImagePickFragment::class.java.name -> ImagePickFragment(imageAdapter)
             AddShoppingItemFragment::class.java.name -> AddShoppingItemFragment(glide)
             ShoppingFragment::class.java.name -> ShoppingFragment(
-                shoppingItemAdapter
+                shoppingItemAdapter,
+                ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
             )
             else -> super.instantiate(classLoader, className)
         }
