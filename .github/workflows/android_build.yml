@@ -20,7 +20,15 @@ jobs:
         with:
           #Specifies the java version
           java-version: 1.8
-      #Run tests
+      #Allow permissions for tests and build
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      #Clean dependencies
+      - name: Clean Dependencies
+        run: ./gradlew clean dependencies
+      - name: Run kLint check
+        run: ./gradlew ktlintCheck
+        #Run tests
       - name: Run Tests
         run: ./gradlew test
       #Build Project
