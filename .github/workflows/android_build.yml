@@ -26,8 +26,6 @@ jobs:
       #Clean dependencies
       - name: Clean Dependencies
         run: ./gradlew clean dependencies
-      - name: Run kLint check
-        run: ./gradlew ktlintCheck
         #Run tests
       - name: Run Tests
         run: ./gradlew test
