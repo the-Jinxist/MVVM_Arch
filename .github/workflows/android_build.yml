@@ -1,0 +1,28 @@
+name: Android Build
+
+on:
+  #This workflow will be triggered every time code is pushed to the repo
+  push:
+  #This workflow will be triggered every time a pull request is initiated
+  pull_request:
+
+jobs:
+  build:
+    #Specifies the environment/vm it should run the code on: here, it's an ubuntu os
+    runs-on: ubuntu-latest
+    #Steps run to validate our build
+    steps:
+      #Checks out the code on this particular branch
+      - uses: actions/checkout@v1
+      #Downloads the JDK needed for building duh!
+      - name: Set Up JDK
+        uses: actions/setup-java@v1
+        with:
+          #Specifies the java version
+          java-version: 1.8
+      #Run tests
+      - name: Run Tests
+        run: ./gradlew test
+      #Build Project
+      - name: Build Project
+        run: ./gradlew assemble
